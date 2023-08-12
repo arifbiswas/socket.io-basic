@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server is run</title>
+</head>
+<body>
+    <h1 id="myTime"></h1>
+    <!-- <input type="text" id="name" >
+    <button onclick="handleSend()">Send</button> -->
+
+    <script src="/socket.io/socket.io.js">
+    </script>
+    <script>
+        const socket = io("/sale");
+
+        // socket.on("myEvent",(data)=>{
+        //     document.getElementById("myTime").innerHTML = data;
+        // })
+        
+        // const handleSend = () =>{
+        //     const name = document.getElementById("name").value;
+
+        //     // predefine event 
+        //     // socket.send(name);
+            
+        //     // custom event 
+        //     socket.emit("myPost",name);
+            
+        // }
+// broadcast 
+            socket.on("myBroadcast",(data)=>{
+                document.getElementById("myTime").innerHTML = data;
+            })
+       
+
+    </script>
+</body>
+</html>

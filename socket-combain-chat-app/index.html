@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="container rounded bg-light pb-3">
+        <h1 class="text-primary">Chat App</h1>
+        <div class="row d-flex justify-content-center bg-primary my-5 rounded">
+            <h1 class="text-white">inbox</h1>
+        </div>
+
+        <div id="message" class="bg-light-subtle">
+            
+        </div>
+
+        <div class="row d-flex justify-content-center">
+            <div class="input-group">
+                <div class="col-md-6 col-12 col-lg-6 d-flex">
+                    <input class="form-control m-2" type="text" id="mgs">
+                    <button class="btn btn-primary my-1" onclick="handleSendMessage()">Send</button>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const handleSendMessage = () => {
+            
+            const mgs = document.getElementById("mgs").value;
+            socket.emit("message", mgs);
+            document.getElementById("mgs").value = "";
+        }
+        
+        socket.on("message_transferrer",(message)=>{
+            // console.log(message);
+              const parent = document.getElementById("message");
+              const child = document.createElement("h5");
+              child.textContent = message;
+              parent.appendChild(child);
+           })
+
+
+    </script>
+  
+</body>
+</html>
